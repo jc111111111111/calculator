@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 /*
@@ -27,7 +28,7 @@ public class Calculator extends JFrame
 	}
 	public static void main(String[] args)
 	{
-		createWindow();
+		createWindow();	
 	}
 }
 class Calc extends JPanel
@@ -73,7 +74,10 @@ class Calc extends JPanel
 		    				if(checkParentheses(text))
 		    				{
 			    				clearIt = true;
-			    				text = Double.toString(solve(text));
+			    				double answer = solve(text);
+			    				if(Math.abs((int) answer - answer) < .0001)
+			    					answer = (int) answer;
+			    				text = Double.toString(answer);
 			   					prevAnswer = text;
 		    				}
 		   					else
@@ -206,7 +210,6 @@ class Calc extends JPanel
 					{
 						split = input.split("[*]+");
 						returnable = doMath(split[0]);
-						System.out.println(split[0]);
 						for(int x = 1; x < split.length; x++) returnable *= doMath(split[x]);
 					}
 					else
